@@ -12,8 +12,10 @@ python = "^3.8"
 Django = "^4.0.1"
 django-heroku = "^0.3.1"
 gunicorn = "^20.1.0"
+python-dotenv = "^0.19.2"
 
 [tool.poetry.dev-dependencies]
+python-dotenv = "^0.19.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
