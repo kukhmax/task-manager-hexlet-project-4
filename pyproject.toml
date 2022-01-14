@@ -10,10 +10,10 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^4.0.1"
+django-heroku = "^0.3.1"
+gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
-gunicorn = "^20.1.0"
-django-heroku = "^0.3.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

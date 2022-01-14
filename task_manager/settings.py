@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-107r2%941-a2&viz^apb5f=em0%td(zp7r27v1+of(l@qx2#&a'
+SECRET_KEY = 'django-insecure-@c45@xd&tv(@eqe9+d&x*^urm1c+=lrr%_#rgvb37@=j7$@)67'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'task_manager.task_manager.urls'
+ROOT_URLCONF = 'task_manager.urls'
 
 TEMPLATES = [
     {

@@ -24,7 +24,7 @@ tzdata = ["tzdata"]
 name = "dj-database-url"
 version = "0.5.0"
 description = "Use Database URLs in your Django Application."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -50,7 +50,7 @@ bcrypt = ["bcrypt"]
 name = "django-heroku"
 version = "0.3.1"
 description = "This is a Django library for Heroku apps."
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -64,7 +64,7 @@ whitenoise = "*"
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -78,7 +78,7 @@ tornado = ["tornado (>=0.2)"]
 name = "psycopg2"
 version = "2.9.3"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -102,7 +102,7 @@ python-versions = ">=2"
 name = "whitenoise"
 version = "5.3.0"
 description = "Radically simplified static file serving for WSGI applications"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5, <4"
 
@@ -112,7 +112,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "6ed1ad5121b9c678ef87eed1e2627e8e62ada480d5de574bc29058ec4eeebbd5"
+content-hash = "19afba9eb56420f6365f12921dc59da2657d044156fd45a442f614b2e8c296cf"
 
 [metadata.files]
 asgiref = [
