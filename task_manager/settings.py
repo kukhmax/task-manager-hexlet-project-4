@@ -33,10 +33,10 @@ load_dotenv()  # loads the configs from .env
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'herokuapp.com',
+    'task-manager-hexlet-lvl4.herokuapp.com',
     '127.0.0.1',
     'localhost',
 ]
