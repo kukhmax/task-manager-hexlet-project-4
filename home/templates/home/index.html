@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% load bootstrap4 %}
 
 
 {% block title %}
-Менеджер задач Hexlet
+{% trans "Task manager" %} Hexlet
 {% endblock%}
 
 
@@ -21,10 +23,10 @@
 <h1 class="my-4"></h1>
 <div class="card">
   <div class="card-body p-5 bg-light">
-    <div class="display-4">Привет от Хекслета!</div>
-      <p class="lead">Практические курсы по программированию</p>
+    <div class="display-4">{{ hello }}</div>
+      <p class="lead">{{ courses }}</p>
       <hr>
-      <a class="btn btn-primary btn-lg" href="#">Узнать больше</a>
+      <a class="btn btn-primary btn-lg" href="#">{{ more }}</a>
     </div>
   </div>
 

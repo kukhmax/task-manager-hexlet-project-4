@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template.loader import render_to_string
+from django.utils.translation import gettext as _
 
 
 def index(request):
-    response = render_to_string('home/index.html')
-    return HttpResponse(response)
+    context = {
+        'hello': _('Hello from Hexlet!'),
+        'more': _('More info'),
+        'courses': _('Practical programming courses'),
+    }
+    return render(request, 'home/index.html', context=context)
