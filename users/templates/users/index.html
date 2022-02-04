@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+
+{% block bootstrap4_content %}
+
+
+<h1 class="col-md-8 mx-auto my-2">Users</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>User's name</th>
+                  <th>Full name</th>
+                  <th>Date joined</th>
+                  <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in users %}
+                <tr>
+                    <td>
+                        {{obj.pk}}
+                    </td>
+                    <td>
+                        {{obj.username}}
+                    </td>
+                    <td>
+                        {{obj}}
+                    </td>
+                    <td>{{ obj.date_joined|date:"d.m.Y, H:i" }}</td>
+                    
+                    <td>
+                        <a href="#">Edit</a>
+                    <br>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr> 
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock%}

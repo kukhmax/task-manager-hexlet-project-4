@@ -1,4 +1,7 @@
-{% load bootstrap4 i18n %}
+{% load i18n %}
+
+{% load bootstrap4 %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,11 +15,14 @@
 
 
     
-    <title>{% block title %}{% endblock %}</title>
+    <title>Task manager Hexlet</title>
   </head>
     <body>
+      {% include 'includes/navbar.html' %}
         
         {% block bootstrap4_content %}{% endblock%}
+
+        {% include 'includes/footer.html' %}
 
     </body>
 </html>

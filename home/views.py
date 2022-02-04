@@ -10,3 +10,6 @@ def index(request):
         'courses': _('Practical programming courses'),
     }
     return render(request, 'home/index.html', context=context)
+
+
+
