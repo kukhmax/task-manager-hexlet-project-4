@@ -36,7 +36,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'task-manager-hexlet-lvl4.herokuapp.com',
+    'herokuapp.com',
     '127.0.0.1',
     'localhost',
 ]
