@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block bootstrap4_content %}
+
+<h1 class="col-md-8 mx-auto my-2">{% trans "Statuses" %}</h1>
+<a class="nav-link col-md-8 mx-auto my-2" href="{% url 'create_status' %}">{% trans "Create status" %}</a>
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>{% trans "Name" %}</th>
+                  <th></th>
+                  <th>{% trans "Date of create" %}</th>
+                  <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for status in statuses %}
+                <tr>
+                    <td>
+                        {{status.pk}}
+                    </td>
+                    <td>
+                        {{status.name}}
+                    </td>
+                    <td>                       
+                    </td>
+                    <td>{{ status.created_at|date:"d.m.Y, H:i" }}</td>
+
+                    <td>
+                        <a href="{{status.pk}}/update/">{% trans "Edit" %}</a>
+                    <br>
+                        <a href="{{status.pk}}/delete/">{% trans "Delete" %}</a>
+                    </td>
+                    
+                </tr> 
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+        
+{% endblock %}
+    

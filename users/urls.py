@@ -1,12 +1,21 @@
 from django.urls import path
-from . import views
+
+from .views import (
+    HomePageView,
+    UserListView,
+    UserCreateView,
+    UserUpdateView,
+    UserDeleteView,
+    LoginUserView,
+    LogoutUserView,
+) 
 
 urlpatterns = [
-    # path('', views.get_users, name='users'),
-    path('', views.UserListView.as_view(), name='users'),
-    path('create/', views.UserCreateView.as_view(), name='user_create'),
-    path('<int:pk>/update/', views.UserUpdateView.as_view(), name='update'),
-    path('<int:pk>/delete/', views.UserDeleteView.as_view(), name='delete'),
-    # path('', views.LoginUserView.as_view(), name='login'),
-    # path('', views.logout_user, name='logout'),
+    path('', HomePageView.as_view(), name='home'),
+    path('users/', UserListView.as_view(), name='users'),
+    path('users/create/', UserCreateView.as_view(), name='user_create'),
+    path('users/<int:pk>/update/', UserUpdateView.as_view(), name='user_update'),
+    path('users/<int:pk>/delete/', UserDeleteView.as_view(), name='user_delete'),
+    path('login/', LoginUserView.as_view(), name='login'),
+    path('logout/', LogoutUserView.as_view(), name='logout'),
 ]

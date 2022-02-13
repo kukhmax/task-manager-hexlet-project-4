@@ -1,0 +1,28 @@
+{% load i18n %}
+
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+
+    
+    <title>Task manager Hexlet</title>
+  </head>
+    <body>
+      {% include 'includes/navbar.html' %}
+        
+        {% block bootstrap4_content %}{% endblock%}
+
+        {% include 'includes/footer.html' %}
+
+    </body>
+</html>

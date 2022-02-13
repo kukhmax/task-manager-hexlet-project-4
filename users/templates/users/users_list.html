@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block bootstrap4_content %}
+
+<h1 class="col-md-8 mx-auto my-2">{% trans "Users" %}</h1>
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>{% trans "User's name" %}</th>
+                  <th>{% trans "Full name" %}</th>
+                  <th>{% trans "Date joined" %}</th>
+                  <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        {{user.pk}}
+                    </td>
+                    <td>
+                        {{user.username}}
+                    </td>
+                    <td>
+                        {{user}}
+                    </td>
+                    <td>{{ user.date_joined|date:"d.m.Y, H:i" }}</td>
+                    
+                    <td>
+                        <a href="{{user.pk}}/update/">{% trans "Edit" %}</a>
+                    <br>
+                        <a href="{{user.pk}}/delete/">{% trans "Delete" %}</a>
+                    </td>
+                </tr> 
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+        
+{% endblock %}
+    
