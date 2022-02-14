@@ -7,7 +7,7 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login as auth_login, logout
@@ -16,6 +16,7 @@ from django.urls import reverse_lazy
 
 from .models import User
 from .forms import  UserRegisterForm, LoginUserForm
+from task_manager.utils import CustomLoginRequiredMixin
 
 
 class HomePageView(TemplateView):
@@ -43,9 +44,10 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         auth_login(self.request, user)
         return redirect('users')
 
-class UserUpdateView(SuccessMessageMixin, UpdateView):
+class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserRegisterForm
+    
     template_name = 'users/update_user.html'
     success_url = reverse_lazy('users')
     success_message = 'User successfully updated'
@@ -68,7 +70,7 @@ class UserUpdateView(SuccessMessageMixin, UpdateView):
 
 
 
-class UserDeleteView(DeleteView):
+class UserDeleteView(CustomLoginRequiredMixin, DeleteView):
     model = User
     template_name = 'users/delete_user_confirm.html'
     success_url = reverse_lazy('index')
@@ -103,7 +105,7 @@ class LoginUserView(SuccessMessageMixin, LoginView):
         return context
     
     def get_success_url(self):
-        return reverse_lazy('index')
+        return reverse_lazy('home')
 
 # def logout_user(request):
 #     logout(request)

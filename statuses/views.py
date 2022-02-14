@@ -9,6 +9,7 @@ from django.views.generic import (
 
 
 from .models import Status
+from task_manager.utils import CustomLoginRequiredMixin
 
 class StatusListView(ListView):
     """View of statuses"""
@@ -25,7 +26,7 @@ class StatusCreateView(CreateView):
     template_name = 'statuses/status_create.html'
     fields = ['name']
 
-class StatusUpdateView(UpdateView):
+class StatusUpdateView(CustomLoginRequiredMixin, UpdateView):
     """View for update status page."""
 
     model = Status
@@ -34,7 +35,7 @@ class StatusUpdateView(UpdateView):
     template_name = 'statuses/status_update.html'
     fields = ['name']
 
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(CustomLoginRequiredMixin, DeleteView):
     """View for status deletion page."""
 
     model = Status

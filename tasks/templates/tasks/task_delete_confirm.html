@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block bootstrap4_content %}
+<div class="container wrapper flex-grow-1">
+<h1 class="my-4">{% trans 'Delete task' %}</h1>
+<p>{% trans 'Are you sure that you want to delete task' %} <b>{{ status }}?</b>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">{% trans 'Yes, delete' %}</button>
+</form>
+{% endblock %}

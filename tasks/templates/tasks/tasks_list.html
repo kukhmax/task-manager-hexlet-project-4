@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block bootstrap4_content %}
+
+<h1 class="col-md-8 mx-auto my-2">{% trans "Tasks" %}</h1>
+<a class="nav-link col-md-8 mx-auto my-2" href="{% url 'create_task' %}">{% trans "Create task" %}</a>
+
+{% if tasks %}
+    
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>{% trans "Name" %}</th>
+                  <th>{% trans "Status" %}</th>
+                  <th>{% trans "Author" %}</th>
+                  <th>{% trans "Executor" %}</th>
+                  <th>{% trans "Date of create" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>
+                        {{task.pk}}
+                    </td>
+                    <td>
+                        <a href="{% url 'task_detail' task.pk %}">{{task.name}}</a>
+                    </td>
+                    <td>
+                        {{task.status}}
+                    </td>
+                    <td>
+                        {{task.author}}
+                    </td>
+                    <td> 
+                        {{ task.executor }}                      
+                    </td>
+                    <td>{{ task.created_at|date:"d.m.Y, H:i" }}</td>
+
+                    <td>
+                        <a href="{% url 'update_task' task.pk %}">{% trans "Edit" %}</a>
+                    <br>
+                        <a href="{% url 'delete_task' task.pk %}">{% trans "Delete" %}</a>
+                    </td>
+                    
+                </tr> 
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+
+<h2 class="display-6 text-center mb-4">{% trans 'No tasks' %}</h2>
+
+{% endif %}
+        
+{% endblock %}
+    
