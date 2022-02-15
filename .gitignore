@@ -117,3 +117,8 @@ media/
 .vim
 .idea
 .vscode
+staticfiles/
+htmlcov/
+.env
+.python-version
+*.bak

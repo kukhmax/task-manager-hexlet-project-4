@@ -26,7 +26,7 @@ class TaskCreateView(SuccessMessageMixin, CustomLoginRequiredMixin, CreateView):
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully created')
     template_name = 'tasks/task_create.html'
-    fields = ['name', 'description', 'status', 'executor']
+    fields = ['name', 'description', 'status', 'executor', 'labels']
 
     def form_valid(self, form):
         """Set author of task as active user."""
@@ -46,7 +46,7 @@ class TaskUpdateView(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully updated')
     template_name = 'tasks/task_update.html'
-    fields = ['name', 'description', 'status', 'executor']
+    fields = ['name', 'description', 'status', 'executor', 'labels']
 
     def form_valid(self, form):
         """Set author of task as active user."""

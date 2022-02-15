@@ -3,6 +3,7 @@ from django.utils.translation import gettext as _
 
 from statuses.models import Status
 from users.models import User
+from labels.models import Label
 
 MAX_LENGTH = 100
 MAX_LENGTH_OF_DESCRIPTION = 600
@@ -45,14 +46,14 @@ class Task(models.Model):
         auto_now_add=True,
         verbose_name=_('Date of create'),
     )
-    # labels = models.ManyToManyField(
-    #     'labels.Label',
-    #     verbose_name=_('Labels'),
-    #     blank=True,
-    #     related_name='tasks',
-    #     through='TaskLabelRelation',
-    #     through_fields=('task', 'label'),
-    # )
+    labels = models.ManyToManyField(
+        Label,
+        verbose_name=_('Labels'),
+        blank=True,
+        related_name='tasks',
+        through='TaskLabelRelation',
+        through_fields=('task', 'label'),
+    )
 
     def __str__(self):
         return self.name
@@ -61,3 +62,15 @@ class Task(models.Model):
 
         verbose_name_plural = _('Tasks')
         ordering = ['-created_at']
+
+class TaskLabelRelation(models.Model):
+    """Table for detailed relations between tasks and labels."""
+
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+    )
+    label = models.ForeignKey(
+        Label,
+        on_delete=models.PROTECT,
+    )

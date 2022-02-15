@@ -27,7 +27,7 @@ load_dotenv()  # loads the configs from .env
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'herokuapp.com',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'statuses.apps.StatusesConfig',
     'tasks.apps.TasksConfig',
+    'labels.apps.LabelsConfig',
 ]
 
 MIDDLEWARE = [
