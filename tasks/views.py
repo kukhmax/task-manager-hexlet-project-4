@@ -1,25 +1,30 @@
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import (
-    ListView,
     CreateView,
     UpdateView,
     DeleteView,
     DetailView,
 )
+from django_filters.views import FilterView 
 
 
 from .models import Task
 from task_manager.utils import CustomLoginRequiredMixin
+from .filters import TaskFilter
 
-class TaskListView(ListView):
+class TaskListView(CustomLoginRequiredMixin, FilterView):
+    """View of page with tasks and filter of tasks"""
+
     model = Task
     template_name = 'tasks/tasks_list.html'
     context_object_name = 'tasks'
+    filterset_class = TaskFilter
 
-class TaskCreateView(SuccessMessageMixin, CustomLoginRequiredMixin, CreateView):
+class TaskCreateView(
+    SuccessMessageMixin, CustomLoginRequiredMixin, CreateView
+):
     """View for create task page."""
 
     model = Task
@@ -39,7 +44,9 @@ class TaskDetailView(DetailView):
     model = Task
     template_name = 'tasks/task_detail.html'
 
-class TaskUpdateView(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView):
+class TaskUpdateView(
+    SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView,
+):
     """View for update task page."""
 
     model = Task
@@ -53,7 +60,9 @@ class TaskUpdateView(SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class TaskDeleteView(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
+class TaskDeleteView(
+    SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView,
+):
     """View for delete task page."""
 
     model = Task
@@ -63,5 +72,3 @@ class TaskDeleteView(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
     deletion_error_message = _(
         'Can not delete task because it is in use',
     )
-
-

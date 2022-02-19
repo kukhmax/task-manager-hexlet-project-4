@@ -4,19 +4,16 @@ from django.views.generic import (
     ListView,
     CreateView,
     UpdateView,
-    DeleteView,
 )
 from django.contrib import messages
-
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import login as auth_login, logout
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
 from .models import User
-from .forms import  UserRegisterForm, LoginUserForm
-from task_manager.utils import CustomLoginRequiredMixin
+from .forms import CreateUserForm
+from task_manager.utils import CustomLoginRequiredMixin, CustomDeleteView
 
 
 class HomePageView(TemplateView):
@@ -24,34 +21,37 @@ class HomePageView(TemplateView):
 
     template_name = "users/home_page.html"
 
+
 class UserListView(ListView):
+    """View of user's list"""
+
     model = User
     template_name = 'users/users_list.html'
     context_object_name = 'users'
 
+
 class UserCreateView(SuccessMessageMixin, CreateView):
-    form_class = UserRegisterForm
-    template_name = 'users/create_user.html'
-    success_url = reverse_lazy('users')
-    success_message = 'User successfully registered'
+    """View for create user."""
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-    
-    def form_valid(self, form):
-        user = form.save()
-        auth_login(self.request, user)
-        return redirect('users')
-
-class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    form_class = UserRegisterForm
-    
+    success_url = reverse_lazy('login')
+    template_name = 'users/create_user.html'
+    form_class = CreateUserForm
+    success_message = _('User successfully registered')
+
+
+class UserUpdateView(
+    CustomLoginRequiredMixin,
+    SuccessMessageMixin,
+    UpdateView,
+):
+    """View for update user."""
+
+    model = User
     template_name = 'users/update_user.html'
     success_url = reverse_lazy('users')
-    success_message = 'User successfully updated'
-
+    form_class = CreateUserForm
+    success_message = _('User successfully updated')
     unable_to_change_others_message = _(
         'You do not have permission to change another user.',
     )
@@ -69,13 +69,13 @@ class UserUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return super().get(request, *args, **kwargs)
 
 
+class UserDeleteView(CustomDeleteView):
+    """View for user deletion page."""
 
-class UserDeleteView(CustomLoginRequiredMixin, DeleteView):
     model = User
     template_name = 'users/delete_user_confirm.html'
-    success_url = reverse_lazy('index')
-    success_message = 'User successfully deleted'
-
+    success_url = reverse_lazy('users')
+    success_message = _('User successfully deleted')
     unable_to_change_others_message = _(
         'You do not have permission to change another user.',
     )
@@ -86,7 +86,8 @@ class UserDeleteView(CustomLoginRequiredMixin, DeleteView):
     def get(self, request, *args, **kwargs):
         """GET requests method.
         Returns:
-            Execute GET request or redirect if user tries to change other users.
+            Execute GET request or redirect
+            if user tries to change other users.
         """
         if request.user != self.get_object():
             messages.error(
@@ -94,22 +95,14 @@ class UserDeleteView(CustomLoginRequiredMixin, DeleteView):
             )
             return redirect('users')
         return super().get(request, *args, **kwargs)
-    
 
 class LoginUserView(SuccessMessageMixin, LoginView):
-    form_class = LoginUserForm
+    """View for login page."""
+
     template_name = 'users/login.html'
+    next_page = reverse_lazy('home')
+    success_message = _('You are logged in')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-    
-    def get_success_url(self):
-        return reverse_lazy('home')
-
-# def logout_user(request):
-#     logout(request)
-#     return redirect('login')
 
 class LogoutUserView(LogoutView):
     """View for logout page."""
@@ -123,5 +116,3 @@ class LogoutUserView(LogoutView):
             self.request, self.logout_message,
         )
         return super().dispatch(request, *args, **kwargs)
-
-

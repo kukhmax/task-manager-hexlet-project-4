@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
+{% load i18n bootstrap4 %}
 
 {% block bootstrap4_content %}
 
 <h1 class="col-md-8 mx-auto my-2">{% trans "Tasks" %}</h1>
 <a class="nav-link col-md-8 mx-auto my-2" href="{% url 'create_task' %}">{% trans "Create task" %}</a>
+
+<div class="mb-3 col-md-8 mx-auto my-2">
+    <div class="card-body bg-light">
+        <form class="form-inline center" method="get">
+            {% bootstrap_field filter.form.status field_class='ml-2 mr-3' %}
+            {% bootstrap_field filter.form.executor field_class='mr-3 ml-2' %}
+            {% bootstrap_field filter.form.labels field_class='mr-3 ml-2' %}
+            {% bootstrap_field filter.form.own_tasks field_class='mr-3' %}
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="{% trans 'Show' %}">
+            </div>
+        </form>
+    </div>
+</div>
+<p></p>
+
 
 {% if tasks %}
     

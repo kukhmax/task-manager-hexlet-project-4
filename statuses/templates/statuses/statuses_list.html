@@ -32,9 +32,9 @@
                     <td>{{ status.created_at|date:"d.m.Y, H:i" }}</td>
 
                     <td>
-                        <a href="{{status.pk}}/update/">{% trans "Edit" %}</a>
+                        <a href="{% url 'update_status' status.pk %}">{% trans "Edit" %}</a>
                     <br>
-                        <a href="{{status.pk}}/delete/">{% trans "Delete" %}</a>
+                        <a href="{% url 'delete_status' status.pk %}">{% trans "Delete" %}</a>
                     </td>
                     
                 </tr> 

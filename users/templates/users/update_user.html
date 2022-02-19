@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
-{% load bootstrap4 %}
+{% load bootstrap4 i18n %}
 
 
 {% block bootstrap4_content %}
 <div class="container wrapper flex-grow-1">
-    <h1 class="my-4">Изменение пользователя</h1>
+    <h1 class="my-4">{% trans "Change user" %}</h1>
 
     <form action="" method="post">
       {% csrf_token %}
     <div class="form-group">
     {% bootstrap_form form %}
     
-      <button class="btn btn-primary" type="submit">Изменить</button>
+      <button class="btn btn-primary" type="submit">{% trans "Change" %}</button>
     </div>
     </form>
 
