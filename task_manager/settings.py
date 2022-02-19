@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from re import T
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
@@ -28,7 +29,7 @@ load_dotenv()  # loads the configs from .env
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'herokuapp.com',
