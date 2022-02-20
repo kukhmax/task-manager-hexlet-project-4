@@ -12,7 +12,7 @@ from django.views.generic import (
 )
 
 from .models import Label
-from task_manager.utils import CustomLoginRequiredMixin
+from task_manager.utils import CustomLoginRequiredMixin, CustomDeleteView
 
 
 class LabelListView(ListView):
@@ -27,30 +27,31 @@ class LabelCreateView(SuccessMessageMixin, CreateView):
 
     model = Label
     success_url = reverse_lazy('labels')
-    success_message = _('label successfully created')
+    success_message = _('Label successfully created')
     template_name = 'labels/label_create.html'
     fields = ['name']
 
 class LabelUpdateView(
-    SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView,
+    SuccessMessageMixin,
+    CustomLoginRequiredMixin,
+    UpdateView,
 ):
     """View for update label page."""
 
     model = Label
-    success_url = reverse_lazy('labels')
-    success_message = _('label successfully updated')
     template_name = 'labels/label_update.html'
+    success_url = reverse_lazy('labels')
+    success_message = _('Label successfully updated')    
     fields = ['name']
 
-class LabelDeleteView(
-    SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView,
-):
+
+class LabelDeleteView(CustomDeleteView):
     """View for label deletion page."""
 
     model = Label
     template_name = 'labels/label_delete_confirm.html'
     success_url = reverse_lazy('labels')
-    success_message = _('label successfully deleted')
+    success_message = _('Label successfully deleted')
     deletion_error_message = _(
         'Can not delete label because it is in use',
     )

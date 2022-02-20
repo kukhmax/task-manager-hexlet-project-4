@@ -21,9 +21,12 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
             messages.error(self.request, self.denied_without_login_message)
             return redirect('login')
         return super().dispatch(request, *args, **kwargs)
-    
+
+
 class CustomDeleteView(
-    SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView,
+    SuccessMessageMixin,
+    CustomLoginRequiredMixin,
+    DeleteView,
 ):
     """Custom view for deletion pages."""
 
@@ -33,7 +36,7 @@ class CustomDeleteView(
     def post(self, request, *args, **kwargs):
         """POST requests method.
         Returns:
-            Execute POST request or redirect 
+            Execute POST request or redirect
             if user tries to delete object in use.
         """
         try:

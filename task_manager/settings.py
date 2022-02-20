@@ -1,3 +1,4 @@
+# flake8: noqa 
 """
 Django settings for task_manager project.
 
@@ -10,11 +11,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from re import T
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
+import dj_database_url
+from dotenv import load_dotenv
 import os
 import rollbar
+import django_heroku
+
+load_dotenv()  # loads the configs from .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-from dotenv import load_dotenv
-load_dotenv()  # loads the configs from .env
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'herokuapp.com',
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
     'statuses.apps.StatusesConfig',
     'tasks.apps.TasksConfig',
     'labels.apps.LabelsConfig',
+    'django_extensions',
     'django_filters',
 ]
 
@@ -137,9 +142,7 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale/',
-]
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 TIME_ZONE = 'UTC'
 
@@ -160,4 +163,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # by heroku
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "users.User" 
+AUTH_USER_MODEL = "users.User"
+
+django_heroku.settings(locals())
+
+database_config = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE,
+    ssl_require=False,
+)
+if database_config:
+    locals()['DATABASES']['default'] = database_config
