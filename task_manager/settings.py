@@ -79,7 +79,7 @@ ROLLBAR = {
     'enabled': not DEBUG,
 }
 
-rollbar.init(**ROLLBAR)
+# rollbar.init(**ROLLBAR)
 
 ROOT_URLCONF = 'task_manager.urls'
 
@@ -137,10 +137,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = os.getenv('LANGUAGE_CODE', default='ru')
+LANGUAGE_CODE = os.getenv('LOCALE', default='ru')
 LANGUAGES = [
-    ('ru', _('Russian')),
-    ('en', _('English')),
+    ('ru', ('Russian')),
+    ('en', ('English')),
 ]
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
