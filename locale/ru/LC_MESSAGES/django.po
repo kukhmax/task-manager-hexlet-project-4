@@ -248,9 +248,12 @@ msgid "Logout"
 msgstr "Выход"
 
 #: templates/includes/navbar.html:31 users/templates/users/login.html:7
-#: users/templates/users/login.html:18
 msgid "Login"
 msgstr "Вход"
+
+#: users/templates/users/login.html:18
+msgid "Login"
+msgstr "Войти"
 
 #: templates/includes/navbar.html:34
 msgid "Sign Up"
