@@ -33,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'herokuapp.com',
@@ -138,8 +138,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = os.getenv('LOCALE', default='ru')
 LANGUAGES = [
-    ('ru', ('Russian')),
     ('en', ('English')),
+    ('ru', ('Russian')),
 ]
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)

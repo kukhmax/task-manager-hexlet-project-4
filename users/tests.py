@@ -181,3 +181,9 @@ class UserTestCase(TestCase):
             str(messages[0]),
             'You do not have permission to change another user.',
         )
+
+
+    def test_signIn_signOut(self, page, base_url='http://127.0.0.1:8000'):
+        page.goto('/')
+
+        assert page.query_selector('text="Вход"') is not None
