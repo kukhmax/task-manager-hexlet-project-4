@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 MAX_LENGTH = 100
 
+
 class Label(models.Model):
     """"Model of task's label"""
     name = models.CharField(
@@ -14,6 +15,6 @@ class Label(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         verbose_name_plural = _("Labels")

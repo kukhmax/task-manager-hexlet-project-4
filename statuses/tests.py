@@ -20,9 +20,9 @@ class StatusTestCase(TestCase):
             username='test_user',
             password='test_pass',
         )
-        test_status = Status.objects.create(
-            name='test_status1',
-        )
+        # test_status = Status.objects.create(
+        #     name='test_status1',
+        # )
         self.client.force_login(test_user)
 
     def test_statuses_list(self):
@@ -95,4 +95,3 @@ class StatusTestCase(TestCase):
         )
         with self.assertRaises(Status.DoesNotExist):
             Status.objects.get(pk=2)
-    

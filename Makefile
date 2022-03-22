@@ -4,7 +4,7 @@ install:
 	poetry install
 
 test:
-	poetry run pytest
+	poetry run python ./manage.py test
 
 test-coverage:
 	poetry run pytest --cov=task_manager --cov-report xml
@@ -12,7 +12,7 @@ test-coverage:
 check: lint test
 
 lint:
-	poetry run flake8 task_manager
+	poetry run flake8
 
 db-clean:
 	@rm db.sqlite3 || true

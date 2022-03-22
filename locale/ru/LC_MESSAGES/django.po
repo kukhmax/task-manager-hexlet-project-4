@@ -97,7 +97,7 @@ msgstr "Метка успешно создана"
 
 #: labels/views.py:44
 msgid "Label successfully updated"
-msgstr ""
+msgstr "Метка успешно изменена"
 
 #: labels/views.py:54
 msgid "Label successfully deleted"
@@ -255,12 +255,12 @@ msgstr "Вход"
 msgid "Log in"
 msgstr "Войти"
 
-#: templates/includes/navbar.html:34
+#: users/templates/users/create_user.html:16
 msgid "Sign Up"
-msgstr "Регистрация"
+msgstr "Зарегистрировать"
 
 #: users/templates/users/create_user.html:8
-#: users/templates/users/create_user.html:16
+#: templates/includes/navbar.html:34
 msgid "Register"
 msgstr "Регистрация"
 

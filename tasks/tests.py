@@ -3,10 +3,10 @@
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
-
-from users.models import User
 from labels.models import Label
 from statuses.models import Status
+from users.models import User
+
 from .models import Task
 
 OK_CODE = 200
@@ -52,7 +52,9 @@ class TaskTestCase(TestCase):
         """Test for checking task creation."""
         response = self.client.get(reverse('create_task'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='tasks/task_create.html')
+        self.assertTemplateUsed(
+            response, template_name='tasks/task_create.html',
+        )
         response = self.client.post(reverse('create_task'), data={
             'name': 'test_task2',
             'description': 'test',
@@ -78,15 +80,21 @@ class TaskTestCase(TestCase):
         Status.objects.create(
             name='test_update',
         )
-        response = self.client.get(reverse('update_task', args='1'))
+        response = self.client.get(
+            reverse('update_task', args='1'),
+        )
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='tasks/task_update.html')
-        response = self.client.post(reverse('update_task', args='1'), data={
-            'name': 'test_update',
-            'description': 'test_update',
-            'status': 2,
-            'executor': 1,
-        },
+        self.assertTemplateUsed(
+            response, template_name='tasks/task_update.html',
+        )
+        response = self.client.post(
+            reverse('update_task', args='1'),
+            data={
+                'name': 'test_update',
+                'description': 'test_update',
+                'status': 2,
+                'executor': 1,
+            },
         )
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(
@@ -103,7 +111,9 @@ class TaskTestCase(TestCase):
         """Test for checking how status can be deleted."""
         response = self.client.get(reverse('delete_task', args='1'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='tasks/task_delete_confirm.html')
+        self.assertTemplateUsed(
+            response, template_name='tasks/task_delete_confirm.html',
+        )
         response = self.client.post(reverse('delete_task', args='1'))
         self.assertEqual(response.status_code, REDIRECT_CODE)
         messages = list(get_messages(response.wsgi_request))
@@ -139,7 +149,9 @@ class TaskTestCase(TestCase):
         test_task = Task.objects.get(pk=1)
         response = self.client.get(reverse('task_details', args='1'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='tasks/task_details.html')
+        self.assertTemplateUsed(
+            response, template_name='tasks/task_details.html',
+        )
         self.assertContains(response, test_task.name)
         self.assertContains(response, test_task.description)
         self.assertContains(response, test_task.author)

@@ -96,6 +96,7 @@ class UserDeleteView(CustomDeleteView):
             return redirect('users')
         return super().get(request, *args, **kwargs)
 
+
 class LoginUserView(SuccessMessageMixin, LoginView):
     """View for login page."""
 

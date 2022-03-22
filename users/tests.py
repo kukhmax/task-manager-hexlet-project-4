@@ -27,7 +27,6 @@ class UserTestCase(TestCase):
         )
         protected_user.save()
 
-
     def test_home_page(self):
         """Test for checking main page."""
 
@@ -91,7 +90,9 @@ class UserTestCase(TestCase):
         self.client.force_login(User.objects.get(pk=1))
         response = self.client.get(reverse('user_update', args='1'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='users/update_user.html')
+        self.assertTemplateUsed(
+            response, template_name='users/update_user.html'
+        )
         response = self.client.post(reverse('user_update', args='1'), data={
             'first_name': 'test_update',
             'last_name': 'test_update',
@@ -160,7 +161,9 @@ class UserTestCase(TestCase):
         self.client.force_login(User.objects.get(pk=1))
         response = self.client.get(reverse('user_delete', args='1'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='users/delete_user_confirm.html')
+        self.assertTemplateUsed(
+            response, template_name='users/delete_user_confirm.html'
+        )
         response = self.client.post(reverse('user_delete', args='1'))
         self.assertEqual(response.status_code, REDIRECT_CODE)
         messages = list(get_messages(response.wsgi_request))
@@ -181,7 +184,6 @@ class UserTestCase(TestCase):
             str(messages[0]),
             'You do not have permission to change another user.',
         )
-
 
     def test_signIn_signOut(self, page, base_url='http://127.0.0.1:8000'):
         page.goto('/')
