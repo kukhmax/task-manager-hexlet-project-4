@@ -255,17 +255,14 @@ msgstr "Вход"
 msgid "Log in"
 msgstr "Войти"
 
-#: templates/includes/navbar.html:34
-msgid "Sign Up"
-msgstr "Регистрация"
-
-#: users/templates/users/create_user.html:8
-msgid "Register"
-msgstr "Регистрация"
-
 #: users/templates/users/create_user.html:16
 msgid "Sign Up"
 msgstr "Зарегистрировать"
+
+#: users/templates/users/create_user.html:8
+#: templates/includes/navbar.html:34
+msgid "Register"
+msgstr "Регистрация"
 
 #: users/templates/users/delete_user_confirm.html:8
 msgid "Delete user"
