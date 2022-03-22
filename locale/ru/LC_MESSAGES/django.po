@@ -260,9 +260,12 @@ msgid "Sign Up"
 msgstr "Регистрация"
 
 #: users/templates/users/create_user.html:8
-#: users/templates/users/create_user.html:16
 msgid "Register"
 msgstr "Регистрация"
+
+#: users/templates/users/create_user.html:16
+msgid "Sign Up"
+msgstr "Зарегистрировать"
 
 #: users/templates/users/delete_user_confirm.html:8
 msgid "Delete user"
