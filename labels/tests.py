@@ -3,10 +3,10 @@
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
-
 from statuses.models import Status
 from tasks.models import Task
 from users.models import User
+
 from .models import Label
 
 OK_CODE = 200
@@ -40,7 +40,9 @@ class LabelTestCase(TestCase):
         """Test for checking labels page."""
         response = self.client.get(reverse('labels'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='labels/labels_list.html')
+        self.assertTemplateUsed(
+            response, template_name='labels/labels_list.html'
+        )
         self.assertQuerysetEqual(
             response.context_data['object_list'],
             Label.objects.all(),
@@ -51,7 +53,10 @@ class LabelTestCase(TestCase):
         """Test for checking label creation."""
         response = self.client.get(reverse('create_label'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='labels/label_create.html')
+        self.assertTemplateUsed(
+            response,
+            template_name='labels/label_create.html',
+        )
         response = self.client.post(reverse('create_label'), data={
             'name': 'test_label2',
         },
@@ -68,7 +73,10 @@ class LabelTestCase(TestCase):
         """Test for checking how label can be updated."""
         response = self.client.get(reverse('update_label', args='1'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='labels/label_update.html')
+        self.assertTemplateUsed(
+            response,
+            template_name='labels/label_update.html',
+        )
         response = self.client.post(reverse('update_label', args='1'), data={
             'name': 'test_update',
         },
@@ -88,7 +96,10 @@ class LabelTestCase(TestCase):
         )
         response = self.client.get(reverse('delete_label', args='2'))
         self.assertEqual(response.status_code, OK_CODE)
-        self.assertTemplateUsed(response, template_name='labels/label_delete_confirm.html')
+        self.assertTemplateUsed(
+            response,
+            template_name='labels/label_delete_confirm.html',
+        )
         response = self.client.post(reverse('delete_label', args='2'))
         self.assertEqual(response.status_code, REDIRECT_CODE)
         messages = list(get_messages(response.wsgi_request))

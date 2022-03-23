@@ -9,6 +9,7 @@ from labels.models import Label
 MAX_LENGTH = 100
 MAX_LENGTH_OF_DESCRIPTION = 600
 
+
 class Task(models.Model):
     """Model of task"""
 
@@ -58,14 +59,15 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse('task_detail', kwargs={'pk': self.id})
-    
+
     class Meta:
 
         verbose_name_plural = _('Tasks')
         ordering = ['-created_at']
+
 
 class TaskLabelRelation(models.Model):
     """Table for detailed relations between tasks and labels."""

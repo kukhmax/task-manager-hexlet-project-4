@@ -1,20 +1,15 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.views.generic import (
-    CreateView,
-    UpdateView,
-    DeleteView,
-    DetailView,
-)
-from django_filters.views import FilterView 
-
-
-from .models import Task
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
 from task_manager.utils import CustomLoginRequiredMixin
+
 from .filters import TaskFilter
+from .models import Task
+
 
 class TaskListView(CustomLoginRequiredMixin, FilterView):
     """View of page with tasks and filter of tasks"""
@@ -23,6 +18,7 @@ class TaskListView(CustomLoginRequiredMixin, FilterView):
     template_name = 'tasks/tasks_list.html'
     context_object_name = 'tasks'
     filterset_class = TaskFilter
+
 
 class TaskCreateView(
     SuccessMessageMixin, CustomLoginRequiredMixin, CreateView
@@ -40,11 +36,13 @@ class TaskCreateView(
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
 class TaskDetailView(DetailView):
     """View details of task"""
 
     model = Task
     template_name = 'tasks/task_details.html'
+
 
 class TaskUpdateView(
     SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView,
@@ -77,7 +75,8 @@ class TaskDeleteView(SuccessMessageMixin, CustomLoginRequiredMixin, DeleteView):
     def get(self, request, *args, **kwargs):
         """GET requests method.
         Returns:
-            Execute GET request or redirect if user tries to delete not his own task.
+            Execute GET request or redirect
+            if user tries to delete not his own task.
         """
         if request.user != self.get_object().author:
             messages.error(

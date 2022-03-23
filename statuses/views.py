@@ -13,11 +13,13 @@ from django.views.generic import (
 from .models import Status
 from task_manager.utils import CustomLoginRequiredMixin, CustomDeleteView
 
+
 class StatusListView(ListView):
     """View of statuses"""
     model = Status
     template_name = 'statuses/statuses_list.html'
     context_object_name = 'statuses'
+
 
 class StatusCreateView(SuccessMessageMixin, CreateView):
     """View for create status page."""
@@ -27,6 +29,7 @@ class StatusCreateView(SuccessMessageMixin, CreateView):
     success_message = _('Status successfully created')
     template_name = 'statuses/status_create.html'
     fields = ['name']
+
 
 class StatusUpdateView(
     SuccessMessageMixin, CustomLoginRequiredMixin, UpdateView
@@ -38,6 +41,7 @@ class StatusUpdateView(
     success_message = _('Status successfully updated')
     template_name = 'statuses/status_update.html'
     fields = ['name']
+
 
 class StatusDeleteView(CustomDeleteView):
     """View for status deletion page."""

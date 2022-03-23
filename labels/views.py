@@ -3,16 +3,10 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.contrib import messages
-from django.views.generic import (
-    ListView,
-    CreateView,
-    UpdateView,
-    DeleteView,
-)
+from django.views.generic import CreateView, ListView, UpdateView
+from task_manager.utils import CustomDeleteView, CustomLoginRequiredMixin
 
 from .models import Label
-from task_manager.utils import CustomLoginRequiredMixin, CustomDeleteView
 
 
 class LabelListView(ListView):
@@ -31,6 +25,7 @@ class LabelCreateView(SuccessMessageMixin, CreateView):
     template_name = 'labels/label_create.html'
     fields = ['name']
 
+
 class LabelUpdateView(
     SuccessMessageMixin,
     CustomLoginRequiredMixin,
@@ -41,7 +36,7 @@ class LabelUpdateView(
     model = Label
     template_name = 'labels/label_update.html'
     success_url = reverse_lazy('labels')
-    success_message = _('Label successfully updated')    
+    success_message = _('Label successfully updated')
     fields = ['name']
 
 
