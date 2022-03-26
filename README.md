@@ -5,6 +5,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/75c082b6fa48b0a09ffa/maintainability)](https://codeclimate.com/github/kukhmax/python-project-lvl4/maintainability)
 
+[![Linter CI](https://github.com/kukhmax/python-project-lvl4/actions/workflows/my-lint-check.yml/badge.svg)](https://github.com/kukhmax/python-project-lvl4/actions/workflows/my-lint-check.yml)
 
 ---
 
